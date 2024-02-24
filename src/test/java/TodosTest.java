@@ -33,7 +33,8 @@ public class TodosTest {
 
         Assertions.assertTrue(simpleTask.matches("Позвони"));
     }
-        @Test
+
+    @Test
     public void shouldNotMatchesTodosSimpleTaskTest() {
         SimpleTask simpleTask = new SimpleTask(5, "Позвонить родителям");
 
@@ -71,6 +72,7 @@ public class TodosTest {
 
         Assertions.assertTrue(meeting.matches("Приложение НетоБанка"));
     }
+
     @Test
     public void shouldNotMatchesTodosMeetingTest() {
         Meeting meeting = new Meeting(
@@ -103,6 +105,7 @@ public class TodosTest {
 
         Assertions.assertFalse(epic.matches("Яйца"));
     }
+
     @Test
     public void shouldNotStrictMatchesTodosEpicTest() {
         String[] subtasks = {"Чай", "Кофе", "Потанцуем"};
@@ -111,6 +114,7 @@ public class TodosTest {
 
         Assertions.assertFalse(epic.strictMatches("Яйца"));
     }
+
     @Test
     public void matchesTodosEpicFirstVarTest() {
         String[] subtasks = {"Молоко", "Яйца", "Хлеб"};
@@ -229,4 +233,103 @@ public class TodosTest {
 
         Assertions.assertArrayEquals(actual, expected);
     }
+
+    @Test
+    public void searchMultipleMatches() {
+        SimpleTask simpleTask = new SimpleTask(1, "Купить книгу");
+
+        String[] subtask = {"Купить книгу", "Скачать фильм", "Пробежка"};
+        Epic epic = new Epic(4, subtask);
+
+        Meeting meeting = new Meeting(
+                2,
+                "Купить книгу",
+                "Курсы повышения квалификации",
+                "21/07/2024"
+        );
+
+        Todos todos = new Todos();
+        todos.add(simpleTask);
+        todos.add(epic);
+        todos.add(meeting);
+
+
+        Task[] expected = {simpleTask, epic, meeting};
+        Task[] actual = todos.search("Купить книгу");
+        Assertions.assertArrayEquals(expected, actual);
+    }
+    @Test
+    public void searchOneEpicMatches() {
+        SimpleTask simpleTask = new SimpleTask(1, "Купить книгу");
+
+        String[] subtask = {"Купить книгу", "Скачать фильм", "Пробежка"};
+        Epic epic = new Epic(4, subtask);
+
+        Meeting meeting = new Meeting(
+                2,
+                "Купить книгу",
+                "Курсы повышения квалификации",
+                "21/07/2024"
+        );
+
+        Todos todos = new Todos();
+        todos.add(simpleTask);
+        todos.add(epic);
+        todos.add(meeting);
+
+
+        Task[] expected = {epic};
+        Task[] actual = todos.search("Скачать фильм");
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void searchOneMeetingMatches() {
+        SimpleTask simpleTask = new SimpleTask(1, "Купить книгу");
+
+        String[] subtask = {"Купить книгу", "Скачать фильм", "Пробежка"};
+        Epic epic = new Epic(4, subtask);
+
+        Meeting meeting = new Meeting(
+                2,
+                "Купить книгу",
+                "Курсы повышения квалификации",
+                "21/07/2024"
+        );
+
+        Todos todos = new Todos();
+        todos.add(simpleTask);
+        todos.add(epic);
+        todos.add(meeting);
+
+
+        Task[] expected = {meeting};
+        Task[] actual = todos.search("Курсы повышения квалификации");
+        Assertions.assertArrayEquals(expected, actual);
+    }
+    @Test
+    public void searchNoMatches() {
+        SimpleTask simpleTask = new SimpleTask(1, "Купить книгу");
+
+        String[] subtask = {"Купить книгу", "Скачать фильм", "Пробежка"};
+        Epic epic = new Epic(4, subtask);
+
+        Meeting meeting = new Meeting(
+                2,
+                "Купить книгу",
+                "Курсы повышения квалификации",
+                "21/07/2024"
+        );
+
+        Todos todos = new Todos();
+        todos.add(simpleTask);
+        todos.add(epic);
+        todos.add(meeting);
+
+
+        Task[] expected = {};
+        Task[] actual = todos.search("Отпуск");
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
 }
