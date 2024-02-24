@@ -70,7 +70,20 @@ public class TodosTest {
         );
 
         Assertions.assertTrue(meeting.matches("Приложение НетоБанка"));
-    } @Test
+    }    @Test
+    public void shouldNotMatchesTodosMeetingTest() {
+        Meeting meeting = new Meeting(
+                555,
+                "Выкатка 3й версии приложения",
+                "Приложение НетоБанка",
+                "Во вторник после обеда"
+        );
+
+        Assertions.assertFalse(meeting.matches("Проверка False-branch"));
+    }
+
+
+    @Test
     public void strictMatchesTodosMeetingProjectTest() {
         Meeting meeting = new Meeting(
                 555,
@@ -81,6 +94,7 @@ public class TodosTest {
 
         Assertions.assertTrue(meeting.strictMatches("Приложение НетоБанка"));
     }
+
 
     @Test
     public void shouldNotMatchesTodosEpicTest() {
@@ -99,7 +113,7 @@ public class TodosTest {
         Assertions.assertFalse(epic.strictMatches("Яйца"));
     }
     @Test
-    public void matchesTodosMeetingEpicFirstVarTest() {
+    public void matchesTodosEpicFirstVarTest() {
         String[] subtasks = {"Молоко", "Яйца", "Хлеб"};
 
         Epic epic = new Epic(55, subtasks);
@@ -109,7 +123,7 @@ public class TodosTest {
     }
 
     @Test
-    public void matchesTodosMeetingEpicSecondVarTest() {
+    public void matchesTodosEpicSecondVarTest() {
         String[] subtasks = {"Молоко", "Яйца", "Хлеб"};
 
         Epic epic = new Epic(55, subtasks);
@@ -118,7 +132,7 @@ public class TodosTest {
     }
 
     @Test
-    public void matchesTodosMeetingEpicTreeVarTest() {
+    public void matchesTodosEpicTreeVarTest() {
         String[] subtasks = {"Молоко", "Яйца", "Хлеб"};
 
         Epic epic = new Epic(55, subtasks);
