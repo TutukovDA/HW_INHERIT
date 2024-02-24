@@ -21,21 +21,18 @@ public class Meeting extends Task {
         this.project = project;
         this.start = start;
     }
+
     @Override
     public boolean matches(String query) {
-        if (topic.contains(query)) {
-            return true;
-        }
-        if (project.contains(query)) {
+        if (topic.contains(query) || project.contains(query)){
             return true;
         }
         return false;
-    }@Override
+    }
+
+    @Override
     public boolean strictMatches(String query) {
-        if (topic.equals(query)) {
-            return true;
-        }
-        if (project.equals(query)) {
+        if (topic.equals(query)||project.equals(query)) {
             return true;
         }
         return false;
