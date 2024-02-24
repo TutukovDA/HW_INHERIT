@@ -73,11 +73,18 @@ public class TodosTest {
     }
 
     @Test
+    public void shouldMatchesTodosEpicTest() {
+        String[] subtasks = {"Чай", "Кофе", "Потанцуем"};
+
+        Epic epic = new Epic(55, subtasks);
+
+        Assertions.assertFalse(epic.matches("Яйца"));
+    }
+    @Test
     public void matchesTodosMeetingEpicFirstVarTest() {
         String[] subtasks = {"Молоко", "Яйца", "Хлеб"};
 
         Epic epic = new Epic(55, subtasks);
-
 
         Assertions.assertTrue(epic.matches("Молоко"));
 
@@ -88,7 +95,6 @@ public class TodosTest {
         String[] subtasks = {"Молоко", "Яйца", "Хлеб"};
 
         Epic epic = new Epic(55, subtasks);
-
 
         Assertions.assertTrue(epic.matches("Яйца"));
     }
