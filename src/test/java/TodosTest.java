@@ -34,7 +34,7 @@ public class TodosTest {
         Assertions.assertTrue(simpleTask.matches("Позвони"));
     }
         @Test
-    public void shouldNotmatchesTodosSimpleTaskTest() {
+    public void shouldNotMatchesTodosSimpleTaskTest() {
         SimpleTask simpleTask = new SimpleTask(5, "Позвонить родителям");
 
         Assertions.assertFalse(simpleTask.matches("Перезвонить родителям"));
@@ -70,6 +70,16 @@ public class TodosTest {
         );
 
         Assertions.assertTrue(meeting.matches("Приложение НетоБанка"));
+    } @Test
+    public void strictMatchesTodosMeetingProjectTest() {
+        Meeting meeting = new Meeting(
+                555,
+                "Выкатка 3й версии приложения",
+                "Приложение НетоБанка",
+                "Во вторник после обеда"
+        );
+
+        Assertions.assertTrue(meeting.strictMatches("Приложение НетоБанка"));
     }
 
     @Test
@@ -79,7 +89,8 @@ public class TodosTest {
         Epic epic = new Epic(55, subtasks);
 
         Assertions.assertFalse(epic.matches("Яйца"));
-    }    @Test
+    }
+    @Test
     public void shouldNotStrictMatchesTodosEpicTest() {
         String[] subtasks = {"Чай", "Кофе", "Потанцуем"};
 
