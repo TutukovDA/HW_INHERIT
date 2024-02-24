@@ -253,11 +253,11 @@ public class TodosTest {
         todos.add(epic);
         todos.add(meeting);
 
-
         Task[] expected = {simpleTask, epic, meeting};
         Task[] actual = todos.search("Купить книгу");
         Assertions.assertArrayEquals(expected, actual);
     }
+
     @Test
     public void searchOneEpicMatches() {
         SimpleTask simpleTask = new SimpleTask(1, "Купить книгу");
@@ -276,7 +276,6 @@ public class TodosTest {
         todos.add(simpleTask);
         todos.add(epic);
         todos.add(meeting);
-
 
         Task[] expected = {epic};
         Task[] actual = todos.search("Скачать фильм");
@@ -302,11 +301,11 @@ public class TodosTest {
         todos.add(epic);
         todos.add(meeting);
 
-
         Task[] expected = {meeting};
         Task[] actual = todos.search("Курсы повышения квалификации");
         Assertions.assertArrayEquals(expected, actual);
     }
+
     @Test
     public void searchNoMatches() {
         SimpleTask simpleTask = new SimpleTask(1, "Купить книгу");
@@ -326,10 +325,8 @@ public class TodosTest {
         todos.add(epic);
         todos.add(meeting);
 
-
         Task[] expected = {};
         Task[] actual = todos.search("Отпуск");
         Assertions.assertArrayEquals(expected, actual);
     }
-
 }
